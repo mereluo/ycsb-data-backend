@@ -29,7 +29,7 @@ public class TestConfig {
 
   // Many TestConfig entities belong to one DBConfig
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_test_id") // This is the foreign key column in the test_config table
+  @JoinColumn(name = "fk_db_config_id") // This is the foreign key column in the test_config table
   private DBConfig dbConfig;
 
   @OneToOne(cascade = CascadeType.ALL)
