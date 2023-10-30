@@ -32,10 +32,12 @@ public class TestConfig {
   @JoinColumn(name = "fk_db_config_id") // This is the foreign key column in the test_config table
   private DBConfig dbConfig;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "fk_workload_id", referencedColumnName = "id") // This column will store the reference to the workload entity
-  private Workload workloadEntity; // This field represents the relationship with the workload entity
+  @OneToOne(mappedBy = "testConfigA", cascade = CascadeType.ALL)
+  private WorkloadA workloadA;
 
-  // TODO:
-  //  restrict that one TestConfig can only have up to three specific Workload entities (A, B, F)
+  @OneToOne(mappedBy = "testConfigB", cascade = CascadeType.ALL)
+  private WorkloadB workloadB;
+
+  @OneToOne(mappedBy = "testConfigF", cascade = CascadeType.ALL)
+  private WorkloadF workloadF;
 }

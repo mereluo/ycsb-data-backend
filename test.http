@@ -1,2 +1,21 @@
-###
-GET http://localhost:8080/performance
+### Get all workloadA
+GET http://localhost:8080/api/workloadA
+
+### Create a new workloadA
+POST http://localhost:8080/api/workloadA
+Content-Type: application/json
+
+{
+  "opsPerSec": 100.0,
+  "readMeanLatency": 10.5,
+  "readMaxLatency": 20.5,
+  "readP95": 15.5,
+  "readP99": 25.5,
+  "updateMeanLatency": 8.5,
+  "updateMaxLatency": 18.5,
+  "updateP95": 13.5,
+  "updateP99": 23.5,
+  "timeSeries": {
+    "data": [1, 2, 3, 4, 5]
+  }
+}
