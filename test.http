@@ -1,5 +1,34 @@
-### Get all workloadA
-GET http://localhost:8080/api/workloadA
+### Create databaseOption
+POST http://localhost:8080/api/dbOption
+Content-Type: application/json
+
+{
+  "database": "Sample Database"
+}
+
+### Get databaseOption
+GET http://localhost:8080/api/dbOption
+
+### Create dbConfig
+POST http://localhost:8080/api/dbConfig
+Content-Type: application/json
+
+{
+  "description": "Sample DBConfig",
+  "isTransactional": true,
+  "platform": "Sample Platform",
+  "numOfNodes": 3,
+  "numOfRegions": 2,
+  "isMultiRegion": true,
+  "databaseOption" : {"id": 2}
+}
+
+### Get dbConfig
+GET http://localhost:8080/api/dbConfig
+
+### Create testConfig
+POST http://localhost:8080/api/testConfig
+Content-Type: application/json
 
 ### Create a new workloadA
 POST http://localhost:8080/api/workloadA
@@ -19,3 +48,7 @@ Content-Type: application/json
     "data": [1, 2, 3, 4, 5]
   }
 }
+
+
+### Get all workloadA
+GET http://localhost:8080/api/workloadA
