@@ -1,13 +1,17 @@
+### Get databaseOption
+GET http://localhost:8080/api/dbOption
+
 ### Create databaseOption
 POST http://localhost:8080/api/dbOption
 Content-Type: application/json
 
 {
-  "database": "Sample Database"
+  "database": "MongoDB"
 }
 
-### Get databaseOption
-GET http://localhost:8080/api/dbOption
+
+### Get dbConfig
+GET http://localhost:8080/api/dbConfig
 
 ### Create dbConfig
 POST http://localhost:8080/api/dbConfig
@@ -20,15 +24,27 @@ Content-Type: application/json
   "numOfNodes": 3,
   "numOfRegions": 2,
   "isMultiRegion": true,
-  "databaseOption" : {"id": 2}
+  "databaseOption" : {"id": 1}
 }
 
-### Get dbConfig
-GET http://localhost:8080/api/dbConfig
+### Get testConfig
+GET http://localhost:8080/api/testConfig
 
 ### Create testConfig
 POST http://localhost:8080/api/testConfig
 Content-Type: application/json
+
+{
+  "concurrencyLevel": 64,
+  "recordCounts": 3,
+  "commandLine": "sample commandLine",
+  "workload": 10000,
+  "dbConfig": {"id" : 1}
+}
+
+
+### Get workloadA
+GET http://localhost:8080/api/workloadA
 
 ### Create a new workloadA
 POST http://localhost:8080/api/workloadA
@@ -44,11 +60,6 @@ Content-Type: application/json
   "updateMaxLatency": 18.5,
   "updateP95": 13.5,
   "updateP99": 23.5,
-  "timeSeries": {
-    "data": [1, 2, 3, 4, 5]
-  }
+  "timeSeries": ["key", "value"],
+  "TestConfig": {"id" :  1}
 }
-
-
-### Get all workloadA
-GET http://localhost:8080/api/workloadA

@@ -31,7 +31,7 @@ public class DBConfigController {
   public Optional<DBConfig> findEntityById(@PathVariable("id") Long id) {
     return DBConfigService.findById(id);
   }
-  @PostMapping
+  @PostMapping("")
   public DBConfig saveEntity(@RequestBody DBConfig dbConfig) {
 
     return DBConfigService.saveEntity(dbConfig);

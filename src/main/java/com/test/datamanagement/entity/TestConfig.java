@@ -28,16 +28,16 @@ public class TestConfig {
   private String workload;
 
   // Many TestConfig entities belong to one DBConfig
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "fk_db_config_id") // This is the foreign key column in the test_config table
   private DBConfig dbConfig;
 
-  @OneToOne(mappedBy = "testConfigA", cascade = CascadeType.ALL)
-  private WorkloadA workloadA;
-
-  @OneToOne(mappedBy = "testConfigB", cascade = CascadeType.ALL)
-  private WorkloadB workloadB;
-
-  @OneToOne(mappedBy = "testConfigF", cascade = CascadeType.ALL)
-  private WorkloadF workloadF;
+//  @OneToOne(mappedBy = "testConfigA", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//  private WorkloadA workloadA;
+//
+//  @OneToOne(mappedBy = "testConfigB", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//  private WorkloadB workloadB;
+//
+//  @OneToOne(mappedBy = "testConfigF", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//  private WorkloadF workloadF;
 }

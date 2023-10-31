@@ -22,9 +22,9 @@ public class DatabaseOption {
   private Long id;
 
   // One DatabaseOption -> many DBConfig entities
-  @OneToMany(mappedBy = "databaseOption",
-      cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-  private List<DBConfig> dbConfigs;
+//  @OneToMany(mappedBy = "databaseOption",
+//      cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+//  private List<DBConfig> dbConfigs;
 
   private String database;
 }

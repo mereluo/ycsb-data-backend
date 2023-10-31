@@ -3,6 +3,7 @@ package com.test.datamanagement.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,7 +34,7 @@ public class WorkloadB{
   @Column(columnDefinition = "jsonb")
   private String timeSeries;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "test_config_id")
   private TestConfig testConfigB;
 }

@@ -30,13 +30,13 @@ public class DBConfig {
   private int numOfRegions;
   private String description;
 
-  // One DBConfig can have many TestConfig entities
-  @OneToMany(mappedBy = "dbConfig",
-      cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-  private List<TestConfig> testConfigs;
+//  // One DBConfig can have many TestConfig entities
+//  @OneToMany(mappedBy = "dbConfig",
+//      cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+//  private List<TestConfig> testConfigs;
 
   // Many DBConfig entities belong to one DatabaseOption
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "fk_database_id") // This is the foreign key column in the db_config table
   private DatabaseOption databaseOption;
 }
