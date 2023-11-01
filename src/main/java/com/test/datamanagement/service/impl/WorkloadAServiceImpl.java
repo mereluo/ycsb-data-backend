@@ -4,15 +4,18 @@ import com.test.datamanagement.repository.WorkloadARepository;
 import com.test.datamanagement.service.WorkloadAService;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WorkloadAServiceImpl implements WorkloadAService {
 
   private final WorkloadARepository workloadARepository;
+  private final JdbcTemplate jdbcTemplate;
 
-  public WorkloadAServiceImpl(WorkloadARepository workloadARepository) {
+  public WorkloadAServiceImpl(WorkloadARepository workloadARepository, JdbcTemplate jdbcTemplate) {
     this.workloadARepository = workloadARepository;
+    this.jdbcTemplate = jdbcTemplate;
   }
   @Override
   public List<WorkloadA> findAllEntity() {
@@ -24,6 +27,10 @@ public class WorkloadAServiceImpl implements WorkloadAService {
   }
   @Override
   public WorkloadA saveEntity(WorkloadA workloadA) {
+//    String timeSeriesJson = workloadA.getTimeSeries();
+//    String sql = "INSERT INTO workload_a (time_series) VALUES (?)";
+//    jdbcTemplate.update(sql, timeSeriesJson);
+//    workloadA.setTimeSeries(null);
     return workloadARepository.save(workloadA);
   }
   @Override

@@ -1,6 +1,11 @@
 package com.test.datamanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.test.datamanagement.model.JsonConverter;
+import com.test.datamanagement.model.TimeSeries;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -30,9 +35,11 @@ public class WorkloadA {
   private double updateMaxLatency;
   private double updateP95;
   private double updateP99;
+
   // A column that uses Json or other dt to store Time series
+  @Convert(converter = JsonConverter.class)
   @Column(columnDefinition = "jsonb")
-  private String timeSeries;
+  private TimeSeries timeSeries;
 
   @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "test_config_id")

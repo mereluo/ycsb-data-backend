@@ -60,6 +60,7 @@ Content-Type: application/json
   "updateMaxLatency": 18.5,
   "updateP95": 13.5,
   "updateP99": 23.5,
-  "timeSeries": ["key", "value"],
-  "TestConfig": {"id" :  1}
+  "timeSeries": {"key": "timestamp",
+                "value": "meanLatency"},
+  "testConfigA": {"id" :  1}
 }
