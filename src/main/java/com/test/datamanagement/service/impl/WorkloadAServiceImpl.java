@@ -27,10 +27,6 @@ public class WorkloadAServiceImpl implements WorkloadAService {
   }
   @Override
   public WorkloadA saveEntity(WorkloadA workloadA) {
-//    String timeSeriesJson = workloadA.getTimeSeries();
-//    String sql = "INSERT INTO workload_a (time_series) VALUES (?)";
-//    jdbcTemplate.update(sql, timeSeriesJson);
-//    workloadA.setTimeSeries(null);
     return workloadARepository.save(workloadA);
   }
   @Override

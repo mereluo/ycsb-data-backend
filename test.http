@@ -38,7 +38,6 @@ Content-Type: application/json
   "concurrencyLevel": 64,
   "recordCounts": 3,
   "commandLine": "sample commandLine",
-  "workload": 10000,
   "dbConfig": {"id" : 1}
 }
 
