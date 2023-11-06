@@ -31,6 +31,12 @@ public class DBOptionController {
   public Optional<DatabaseOption> findEntityById(@PathVariable("id") Long id) {
     return DBOptionService.findById(id);
   }
+
+  @GetMapping("/name/{name}")
+  public Optional<DatabaseOption> findFirstByDatabase(@PathVariable("name") String name) {
+    return DBOptionService.findFirstByDatabase(name);
+  }
+
   @PostMapping
   public DatabaseOption saveEntity(@RequestBody DatabaseOption dbOption) {
 

@@ -7,7 +7,9 @@ import java.util.Optional;
 public interface DBOptionService {
   List<DatabaseOption> findAllEntity();
   Optional<DatabaseOption> findById(Long id);
+  Optional<DatabaseOption> findFirstByDatabase(String name);
   DatabaseOption saveEntity(DatabaseOption databaseOption);
   DatabaseOption updateEntity(DatabaseOption databaseOption);
+
   void deleteEntity(Long id);
 }

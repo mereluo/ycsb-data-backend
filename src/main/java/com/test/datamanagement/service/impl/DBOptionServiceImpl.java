@@ -23,6 +23,10 @@ public class DBOptionServiceImpl implements DBOptionService {
     return databaseOptionRepository.findById(id);
   }
   @Override
+  public Optional<DatabaseOption> findFirstByDatabase(String name) {
+    return databaseOptionRepository.findFirstByDatabase(name);
+  }
+  @Override
   public DatabaseOption saveEntity(DatabaseOption databaseOption) {
     return databaseOptionRepository.save(databaseOption);
   }
