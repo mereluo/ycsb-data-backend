@@ -1,6 +1,5 @@
 package com.test.datamanagement;
 
-import com.test.datamanagement.model.TimeSeries;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.client.RestTemplate;
@@ -23,7 +22,13 @@ public class Application {
 //		timeSeries.setKey("key");
 //		timeSeries.setValue("value");
 //		crud.createWorkloadA(1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, timeSeries, "CommandLine");
-    System.out.println(crud.getLatestWorkloadA().getId());
+    System.out.println(crud.findLatestWorkloadA().getId());
+
+		// TODO: read in csv file
+		// 			automatically read in csv file -> create entities
+
+		// TODO: independent task: time series
+
 	}
 
 }

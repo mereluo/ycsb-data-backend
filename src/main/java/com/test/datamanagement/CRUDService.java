@@ -10,6 +10,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * CRUD operations for the database
+ * Only created CREATE AND FIND
+ * TODO: create deleteByDatabase, deleteByDescription, deleteByCommandLine
+ */
 public class CRUDService {
   private final RestTemplate restTemplate;
 
@@ -71,7 +76,7 @@ public class CRUDService {
 
   public void createTestConfig(int concurrencyLevel, int recordCounts, String commandLine,
       String description) {
-    if (getTestConfigByCommandLine(commandLine) == null) {
+    if (findTestConfigByCommandLine(commandLine) == null) {
       String url = "http://localhost:8080/api/testConfig";
       TestConfig newEntity = new TestConfig();
       // create new entity
@@ -87,7 +92,7 @@ public class CRUDService {
       restTemplate.postForObject(url, requestEntity, TestConfig.class);
     }
   }
-  public TestConfig getTestConfigByCommandLine(String commandLine) {
+  public TestConfig findTestConfigByCommandLine(String commandLine) {
     String url = "http://localhost:8080/api/testConfig/commandLine/{commandLine}";
     ResponseEntity<TestConfig> response = restTemplate.getForEntity(url, TestConfig.class, commandLine);
     if (response.getStatusCode().is2xxSuccessful() && response.getBody()!= null)
@@ -95,6 +100,7 @@ public class CRUDService {
     else
       return null;
   }
+
   public void createWorkloadA(double opsPerSec, double readMeanLatency, double readMaxLatency,
       double readP95, double readP99, double updateMeanLatency, double updateMaxLatency,
       double updateP95, double updateP99, TimeSeries timeSeries, String commandLine) {
@@ -111,16 +117,15 @@ public class CRUDService {
     newEntity.setUpdateP95(updateP95);
     newEntity.setUpdateP99(updateP99);
     newEntity.setTimeSeries(timeSeries);
-    newEntity.setTestConfigA(getTestConfigByCommandLine(commandLine));
+    newEntity.setTestConfigA(findTestConfigByCommandLine(commandLine));
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<WorkloadA> requestEntity = new HttpEntity<>(newEntity, headers);
     restTemplate.postForObject(url, requestEntity, WorkloadA.class);
   }
-
   // get the latest created workloadA
-  public WorkloadA getLatestWorkloadA() {
+  public WorkloadA findLatestWorkloadA() {
     String url = "http://localhost:8080/api/workloadA/latest";
     ResponseEntity<WorkloadA> response = restTemplate.getForEntity(url, WorkloadA.class);
     if (response.getStatusCode().is2xxSuccessful() && response.getBody()!= null)
