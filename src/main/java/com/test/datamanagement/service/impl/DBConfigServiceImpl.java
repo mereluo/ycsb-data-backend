@@ -23,6 +23,10 @@ public class DBConfigServiceImpl implements DBConfigService {
     return dbConfigRepository.findById(id);
   }
   @Override
+  public Optional<DBConfig> findByDescription(String description) {
+    return dbConfigRepository.findFirstByDescription(description);
+  }
+  @Override
   public DBConfig saveEntity(DBConfig DBConfig) {
     return dbConfigRepository.save(DBConfig);
   }

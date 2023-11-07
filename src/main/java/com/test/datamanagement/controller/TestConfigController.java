@@ -31,6 +31,10 @@ public class TestConfigController {
   public Optional<TestConfig> findEntityById(@PathVariable("id") Long id) {
     return TestConfigService.findById(id);
   }
+  @GetMapping("/commandLine/{commandLine}")
+  public Optional<TestConfig> findByCommandLine(@PathVariable("commandLine") String commandLine) {
+    return TestConfigService.findByCommandLine(commandLine);
+  }
   @PostMapping
   public TestConfig saveEntity(@RequestBody TestConfig TestConfig) {
 
