@@ -7,6 +7,7 @@ import java.util.Optional;
 public interface DBConfigService {
   List<DBConfig> findAllEntity();
   Optional<DBConfig> findById(Long id);
+  Optional<DBConfig> findByDescription(String description);
   DBConfig saveEntity(DBConfig dbConfig);
   DBConfig updateEntity(DBConfig dbConfig);
   void deleteEntity(Long id);

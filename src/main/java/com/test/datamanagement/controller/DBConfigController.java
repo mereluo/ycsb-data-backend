@@ -21,7 +21,6 @@ public class DBConfigController {
   public DBConfigController(DBConfigService dbConfigService) {
     this.DBConfigService = dbConfigService;
   }
-
   @GetMapping("")
   public List<DBConfig> findAllEntity() {
     return DBConfigService.findAllEntity();
@@ -30,6 +29,11 @@ public class DBConfigController {
   @GetMapping("/{id}")
   public Optional<DBConfig> findEntityById(@PathVariable("id") Long id) {
     return DBConfigService.findById(id);
+  }
+
+  @GetMapping("/description/{description}")
+  public Optional<DBConfig> findEntityByDescription(@PathVariable("description") String description) {
+    return DBConfigService.findByDescription(description);
   }
   @PostMapping("")
   public DBConfig saveEntity(@RequestBody DBConfig dbConfig) {

@@ -31,6 +31,10 @@ public class WorkloadAController {
   public Optional<WorkloadA> findEntityById(@PathVariable("id") Long id) {
     return workloadAService.findById(id);
   }
+  @GetMapping("/latest")
+  public Optional<WorkloadA> findFirstByOrderByIdDesc() {
+    return workloadAService.findFirstByOrderByIdDesc();
+  }
   @PostMapping
   public WorkloadA saveEntity(@RequestBody WorkloadA workloadA) {
 
