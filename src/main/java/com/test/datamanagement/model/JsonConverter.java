@@ -35,3 +35,4 @@ public class JsonConverter implements AttributeConverter<List<TimeSeries>, Strin
         }
     }
 }
+
