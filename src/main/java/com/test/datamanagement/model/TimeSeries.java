@@ -9,4 +9,5 @@ public class TimeSeries {
   private String category;
   private long performance;
   private double value;
+  private int run;
 }
