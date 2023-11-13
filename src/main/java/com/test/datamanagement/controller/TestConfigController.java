@@ -4,6 +4,7 @@ import com.test.datamanagement.entity.TestConfig;
 import com.test.datamanagement.service.TestConfigService;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/testConfig")
 public class TestConfigController {
   private final TestConfigService TestConfigService;
@@ -32,12 +34,15 @@ public class TestConfigController {
     return TestConfigService.findById(id);
   }
   @GetMapping("/commandLine/{commandLine}")
-  public Optional<TestConfig> findByCommandLine(@PathVariable("commandLine") String commandLine) {
+  public TestConfig findByCommandLine(@PathVariable("commandLine") String commandLine) {
     return TestConfigService.findByCommandLine(commandLine);
   }
   @PostMapping
   public TestConfig saveEntity(@RequestBody TestConfig TestConfig) {
-
+    TestConfig entity =  TestConfigService.findByCommandLine(TestConfig.getCommandLine());
+    if (entity!= null && entity.equals(TestConfig)) {
+      return entity;
+    }
     return TestConfigService.saveEntity(TestConfig);
   }
   @PutMapping

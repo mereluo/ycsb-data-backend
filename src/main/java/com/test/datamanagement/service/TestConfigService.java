@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface TestConfigService {
   List<TestConfig> findAllEntity();
   Optional<TestConfig> findById(Long id);
-  Optional<TestConfig> findByCommandLine(String commandLine);
+  TestConfig findByCommandLine(String commandLine);
   TestConfig saveEntity(TestConfig testConfig);
   TestConfig updateEntity(TestConfig testConfig);
   void deleteEntity(Long id);

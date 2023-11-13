@@ -4,6 +4,7 @@ import com.test.datamanagement.entity.DatabaseOption;
 import com.test.datamanagement.service.DBOptionService;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/dbOption")
 public class DBOptionController {
   private final DBOptionService DBOptionService;
@@ -33,13 +35,16 @@ public class DBOptionController {
   }
 
   @GetMapping("/name/{name}")
-  public Optional<DatabaseOption> findFirstByDatabase(@PathVariable("name") String name) {
+  public DatabaseOption findFirstByDatabase(@PathVariable("name") String name) {
     return DBOptionService.findFirstByDatabase(name);
   }
 
   @PostMapping
   public DatabaseOption saveEntity(@RequestBody DatabaseOption dbOption) {
-
+    DatabaseOption entity =  DBOptionService.findFirstByDatabase(dbOption.getDatabase());
+    if (entity != null) {
+      return entity;
+    }
     return DBOptionService.saveEntity(dbOption);
   }
   @PutMapping

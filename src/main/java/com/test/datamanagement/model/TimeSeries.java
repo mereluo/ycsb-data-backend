@@ -6,8 +6,9 @@ import lombok.Setter;
 
 @NoArgsConstructor @Getter @Setter
 public class TimeSeries {
-  private String category;
-  private long performance;
-  private double value;
-  private int run;
+//  private String category;
+//  private long performance;
+//  private double value;
+  private String value;
+  private String key;
 }

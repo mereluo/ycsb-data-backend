@@ -4,6 +4,7 @@ import com.test.datamanagement.entity.DBConfig;
 import com.test.datamanagement.service.DBConfigService;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/dbConfig")
 public class DBConfigController {
   private final DBConfigService DBConfigService;
@@ -32,12 +34,15 @@ public class DBConfigController {
   }
 
   @GetMapping("/description/{description}")
-  public Optional<DBConfig> findEntityByDescription(@PathVariable("description") String description) {
+  public DBConfig findEntityByDescription(@PathVariable("description") String description) {
     return DBConfigService.findByDescription(description);
   }
   @PostMapping("")
   public DBConfig saveEntity(@RequestBody DBConfig dbConfig) {
-
+    DBConfig entity =  DBConfigService.findByDescription(dbConfig.getDescription());
+    if (entity!= null && entity.equals(dbConfig)) {
+      return entity;
+    }
     return DBConfigService.saveEntity(dbConfig);
   }
   @PutMapping
