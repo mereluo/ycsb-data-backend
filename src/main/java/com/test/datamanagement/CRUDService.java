@@ -1,4 +1,5 @@
 package com.test.datamanagement;
+
 import com.test.datamanagement.entity.DBConfig;
 import com.test.datamanagement.entity.DatabaseOption;
 import com.test.datamanagement.entity.TestConfig;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -15,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
  * Only created CREATE AND FIND
  * TODO: create deleteByDatabase, deleteByDescription, deleteByCommandLine
  */
+@Service
 public class CRUDService {
   private final RestTemplate restTemplate;
 

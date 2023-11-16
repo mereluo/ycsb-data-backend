@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface WorkloadAService {
   List<WorkloadA> findAllEntity();
   Optional<WorkloadA> findById(Long id);
-  Optional<WorkloadA> findFirstByOrderByIdDesc();
+  WorkloadA findFirstByOrderByIdDesc();
   WorkloadA saveEntity(WorkloadA workloadA);
   WorkloadA updateEntity(WorkloadA workloadA);
   void deleteEntity(Long id);

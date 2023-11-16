@@ -23,7 +23,7 @@ public class TestConfigServiceImpl implements TestConfigService {
     return testConfigRepository.findById(id);
   }
   @Override
-  public Optional<TestConfig> findByCommandLine(String commandLine) {
+  public TestConfig findByCommandLine(String commandLine) {
     return testConfigRepository.findFirstByCommandLine(commandLine);
   }
   @Override
