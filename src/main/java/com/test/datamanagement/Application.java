@@ -8,8 +8,8 @@ import org.springframework.web.client.RestTemplate;
 public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
-		RestTemplate restTemplate = new RestTemplate(); 
-		CRUDService crud = new CRUDService(restTemplate);
+//		RestTemplate restTemplate = new RestTemplate();
+//		CRUDService crud = new CRUDService(restTemplate);
 //		String dbName = "Spanner";
 //		crud.createDBOption(dbName);
 //		System.out.println(crud.getOptionIDByName(dbName));
@@ -22,13 +22,12 @@ public class Application {
 //		timeSeries.setKey("key");
 //		timeSeries.setValue("value");
 //		crud.createWorkloadA(1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, timeSeries, "CommandLine");
-    System.out.println(crud.findLatestWorkloadA().getId());
+//    System.out.println(crud.findLatestWorkloadA().getId());
 
 		// TODO: read in csv file
 		// 			automatically read in csv file -> create entities
 
 		// TODO: independent task: time series
-
 	}
 
 }
