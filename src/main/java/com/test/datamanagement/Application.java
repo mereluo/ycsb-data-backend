@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
-		RestTemplate restTemplate = new RestTemplate();
+		RestTemplate restTemplate = new RestTemplate(); 
 		CRUDService crud = new CRUDService(restTemplate);
 //		String dbName = "Spanner";
 //		crud.createDBOption(dbName);
