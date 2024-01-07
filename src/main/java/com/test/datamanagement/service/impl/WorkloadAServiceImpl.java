@@ -26,7 +26,7 @@ public class WorkloadAServiceImpl implements WorkloadAService {
     return workloadARepository.findById(id);
   }
   @Override
-  public Optional<WorkloadA> findFirstByOrderByIdDesc() {
+  public WorkloadA findFirstByOrderByIdDesc() {
     return workloadARepository.findFirstByOrderByIdDesc();
   }
   @Override

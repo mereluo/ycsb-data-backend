@@ -4,6 +4,7 @@ import com.test.datamanagement.entity.WorkloadA;
 import com.test.datamanagement.service.WorkloadAService;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/workloadA")
 public class WorkloadAController {
   private final WorkloadAService workloadAService;
@@ -21,7 +23,6 @@ public class WorkloadAController {
   public WorkloadAController(WorkloadAService workloadAService) {
     this.workloadAService = workloadAService;
   }
-
   @GetMapping("")
   public List<WorkloadA> findAllEntity() {
     return workloadAService.findAllEntity();
@@ -32,7 +33,7 @@ public class WorkloadAController {
     return workloadAService.findById(id);
   }
   @GetMapping("/latest")
-  public Optional<WorkloadA> findFirstByOrderByIdDesc() {
+  public WorkloadA findFirstByOrderByIdDesc() {
     return workloadAService.findFirstByOrderByIdDesc();
   }
   @PostMapping

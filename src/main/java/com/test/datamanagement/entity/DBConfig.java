@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,4 +33,28 @@ public class DBConfig {
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "fk_database_id") // This is the foreign key column in the db_config table
   private DatabaseOption databaseOption;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    DBConfig dbConfig = (DBConfig) o;
+    return isTransactional() == dbConfig.isTransactional()
+        && getNumOfNodes() == dbConfig.getNumOfNodes()
+        && isMultiRegion() == dbConfig.isMultiRegion()
+        && getNumOfRegions() == dbConfig.getNumOfRegions() && Objects.equals(getPlatform(),
+        dbConfig.getPlatform()) && Objects.equals(getDescription(),
+        dbConfig.getDescription()) && Objects.equals(getDatabaseOption(),
+        dbConfig.getDatabaseOption());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(isTransactional(), getPlatform(), getNumOfNodes(), isMultiRegion(),
+        getNumOfRegions(), getDescription(), getDatabaseOption());
+  }
 }

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TestConfigRepository extends JpaRepository<TestConfig, Long> {
-  Optional<TestConfig> findFirstByCommandLine(String commandLine);
+  TestConfig findFirstByCommandLine(String commandLine);
 }

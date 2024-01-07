@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.util.Objects;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,4 +29,23 @@ public class TestConfig {
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "fk_db_config_id") // This is the foreign key column in the test_config table
   private DBConfig dbConfig;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    TestConfig that = (TestConfig) o;
+    return getConcurrencyLevel() == that.getConcurrencyLevel()
+        && getRecordCounts() == that.getRecordCounts() && Objects.equals(getCommandLine(),
+        that.getCommandLine()) && Objects.equals(getDbConfig(), that.getDbConfig());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getConcurrencyLevel(), getRecordCounts(), getCommandLine(), getDbConfig());
+  }
 }

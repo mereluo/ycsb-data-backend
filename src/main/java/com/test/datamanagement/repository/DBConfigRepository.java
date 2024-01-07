@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DBConfigRepository extends JpaRepository<DBConfig, Long> {
-  Optional<DBConfig> findFirstByDescription(String description);
+  DBConfig findFirstByDescription(String description);
 }
