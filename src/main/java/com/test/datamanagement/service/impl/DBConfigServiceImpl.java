@@ -1,6 +1,7 @@
 package com.test.datamanagement.service.impl;
 
 import com.test.datamanagement.entity.DBConfig;
+import com.test.datamanagement.entity.DatabaseOption;
 import com.test.datamanagement.repository.DBConfigRepository;
 import com.test.datamanagement.service.DBConfigService;
 import java.util.List;
@@ -27,12 +28,16 @@ public class DBConfigServiceImpl implements DBConfigService {
     return dbConfigRepository.findFirstByDescription(description);
   }
   @Override
-  public DBConfig saveEntity(DBConfig DBConfig) {
-    return dbConfigRepository.save(DBConfig);
+  public DBConfig saveEntity(DBConfig dbConfig) {
+    DBConfig entity = findByDescription(dbConfig.getDescription());
+    if (entity != null) {
+      return entity;
+    }
+    return dbConfigRepository.save(dbConfig);
   }
   @Override
-  public DBConfig updateEntity(DBConfig DBConfig) {
-    return dbConfigRepository.save(DBConfig);
+  public DBConfig updateEntity(DBConfig dbConfig) {
+    return dbConfigRepository.save(dbConfig);
   }
   @Override
   public void deleteEntity(Long id) {

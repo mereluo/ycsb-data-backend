@@ -30,6 +30,13 @@ public class TestConfig {
   @JoinColumn(name = "fk_db_config_id") // This is the foreign key column in the test_config table
   private DBConfig dbConfig;
 
+  public TestConfig(int concurrencyLevel, int recordCounts, String commandLine, DBConfig dbConfig) {
+    this.concurrencyLevel = concurrencyLevel;
+    this.recordCounts = recordCounts;
+    this.commandLine = commandLine;
+    this.dbConfig = dbConfig;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

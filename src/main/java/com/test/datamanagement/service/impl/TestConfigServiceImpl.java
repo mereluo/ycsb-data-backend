@@ -1,5 +1,6 @@
 package com.test.datamanagement.service.impl;
 
+import com.test.datamanagement.entity.DBConfig;
 import com.test.datamanagement.entity.TestConfig;
 import com.test.datamanagement.repository.TestConfigRepository;
 import com.test.datamanagement.service.TestConfigService;
@@ -28,6 +29,10 @@ public class TestConfigServiceImpl implements TestConfigService {
   }
   @Override
   public TestConfig saveEntity(TestConfig testConfig) {
+    TestConfig entity = findByCommandLine(testConfig.getCommandLine());
+    if (entity != null) {
+      return entity;
+    }
     return testConfigRepository.save(testConfig);
   }
   @Override

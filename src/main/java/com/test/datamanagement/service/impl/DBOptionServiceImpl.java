@@ -28,6 +28,10 @@ public class DBOptionServiceImpl implements DBOptionService {
   }
   @Override
   public DatabaseOption saveEntity(DatabaseOption databaseOption) {
+    DatabaseOption entity = findFirstByDatabase(databaseOption.getDatabase());
+    if (entity != null) {
+      return entity;
+    }
     return databaseOptionRepository.save(databaseOption);
   }
   @Override

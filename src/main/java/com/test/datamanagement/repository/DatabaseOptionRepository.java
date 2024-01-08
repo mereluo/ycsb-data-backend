@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DatabaseOptionRepository extends JpaRepository<DatabaseOption, Long> {
-
   DatabaseOption findFirstByDatabase(String name);
 }

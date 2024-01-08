@@ -41,10 +41,10 @@ public class DBOptionController {
 
   @PostMapping
   public DatabaseOption saveEntity(@RequestBody DatabaseOption dbOption) {
-    DatabaseOption entity =  DBOptionService.findFirstByDatabase(dbOption.getDatabase());
-    if (entity != null) {
-      return entity;
-    }
+//    DatabaseOption entity =  DBOptionService.findFirstByDatabase(dbOption.getDatabase());
+//    if (entity != null) {
+//      return entity;
+//    }
     return DBOptionService.saveEntity(dbOption);
   }
   @PutMapping
