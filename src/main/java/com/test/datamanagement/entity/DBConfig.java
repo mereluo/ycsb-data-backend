@@ -34,6 +34,17 @@ public class DBConfig {
   @JoinColumn(name = "fk_database_id") // This is the foreign key column in the db_config table
   private DatabaseOption databaseOption;
 
+  public DBConfig(boolean isTransactional, String platform, int numOfNodes, boolean isMultiRegion,
+      int numOfRegions, String description, DatabaseOption databaseOption) {
+    this.isTransactional = isTransactional;
+    this.platform = platform;
+    this.numOfNodes = numOfNodes;
+    this.isMultiRegion = isMultiRegion;
+    this.numOfRegions = numOfRegions;
+    this.description = description;
+    this.databaseOption = databaseOption;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

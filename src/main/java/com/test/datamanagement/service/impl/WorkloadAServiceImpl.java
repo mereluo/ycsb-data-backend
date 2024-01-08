@@ -1,9 +1,11 @@
 package com.test.datamanagement.service.impl;
+import com.test.datamanagement.entity.TestConfig;
 import com.test.datamanagement.entity.WorkloadA;
 import com.test.datamanagement.repository.WorkloadARepository;
 import com.test.datamanagement.service.WorkloadAService;
 import java.util.List;
 import java.util.Optional;
+import org.aspectj.weaver.ast.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +13,9 @@ import org.springframework.stereotype.Service;
 public class WorkloadAServiceImpl implements WorkloadAService {
 
   private final WorkloadARepository workloadARepository;
-  private final JdbcTemplate jdbcTemplate;
 
-  public WorkloadAServiceImpl(WorkloadARepository workloadARepository, JdbcTemplate jdbcTemplate) {
+  public WorkloadAServiceImpl(WorkloadARepository workloadARepository) {
     this.workloadARepository = workloadARepository;
-    this.jdbcTemplate = jdbcTemplate;
   }
   @Override
   public List<WorkloadA> findAllEntity() {
@@ -25,12 +25,21 @@ public class WorkloadAServiceImpl implements WorkloadAService {
   public Optional<WorkloadA> findById(Long id) {
     return workloadARepository.findById(id);
   }
+
   @Override
   public WorkloadA findFirstByOrderByIdDesc() {
     return workloadARepository.findFirstByOrderByIdDesc();
   }
+  public WorkloadA findFirstByTestConfigA(TestConfig testConfig) {
+    return workloadARepository.findFirstByTestConfigA(testConfig);
+  }
+
   @Override
   public WorkloadA saveEntity(WorkloadA workloadA) {
+    WorkloadA entity = findFirstByTestConfigA(workloadA.getTestConfigA());
+    if (entity != null) {
+      return entity;
+    }
     return workloadARepository.save(workloadA);
   }
   @Override

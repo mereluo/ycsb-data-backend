@@ -18,12 +18,11 @@ public class DatabaseOption {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  // One DatabaseOption -> many DBConfig entities
-//  @OneToMany(mappedBy = "databaseOption",
-//      cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-//  private List<DBConfig> dbConfigs;
-
   private String database;
+
+  public DatabaseOption(String database) {
+    this.database = database;
+  }
 
   @Override
   public boolean equals(Object o) {
