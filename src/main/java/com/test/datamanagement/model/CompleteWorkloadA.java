@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class AModel {
+public class CompleteWorkloadA {
   private double opsPerSec;
   private double readMeanLatency;
   private double readMaxLatency;

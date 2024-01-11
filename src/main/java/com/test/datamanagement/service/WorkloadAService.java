@@ -1,5 +1,6 @@
 package com.test.datamanagement.service;
 
+import com.test.datamanagement.entity.TestConfig;
 import com.test.datamanagement.entity.WorkloadA;
 import java.util.List;
 import java.util.Optional;
@@ -7,8 +8,8 @@ import java.util.Optional;
 public interface WorkloadAService {
   List<WorkloadA> findAllEntity();
   Optional<WorkloadA> findById(Long id);
-  WorkloadA findFirstByOrderByIdDesc();
   WorkloadA saveEntity(WorkloadA workloadA);
+  WorkloadA findFirstByTestConfigA(TestConfig testConfig);
   WorkloadA updateEntity(WorkloadA workloadA);
   void deleteEntity(Long id);
 }

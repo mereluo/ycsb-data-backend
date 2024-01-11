@@ -19,6 +19,10 @@ public class DBConfigServiceImpl implements DBConfigService {
   public List<DBConfig> findAllEntity() {
     return dbConfigRepository.findAll();
   }
+
+  public List<DBConfig> findAllByDatabaseOption(DatabaseOption databaseOption) {
+    return dbConfigRepository.findAllByDatabaseOption(databaseOption);
+  }
   @Override
   public Optional<DBConfig> findById(Long id) {
     return dbConfigRepository.findById(id);
