@@ -4,14 +4,15 @@ import com.test.datamanagement.entity.DBConfig;
 import com.test.datamanagement.entity.DatabaseOption;
 import com.test.datamanagement.entity.TestConfig;
 import com.test.datamanagement.entity.WorkloadA;
-import com.test.datamanagement.model.AModel;
+import com.test.datamanagement.model.CompleteWorkloadA;
+import com.test.datamanagement.model.RequestWorkloadA;
 import com.test.datamanagement.service.DBConfigService;
 import com.test.datamanagement.service.DBOptionService;
 import com.test.datamanagement.service.TestConfigService;
 import com.test.datamanagement.service.WorkloadAService;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,17 +49,14 @@ public class WorkloadAController {
   public Optional<WorkloadA> findEntityById(@PathVariable("id") Long id) {
     return workloadAService.findById(id);
   }
-  @GetMapping("/latest")
-  public WorkloadA findFirstByOrderByIdDesc() {
-    return workloadAService.findFirstByOrderByIdDesc();
-  }
+
   @PostMapping
   public WorkloadA saveEntity(@RequestBody WorkloadA workloadA) {
     return workloadAService.saveEntity(workloadA);
   }
 
   @PostMapping("/createA")
-  public WorkloadA createA(@RequestBody AModel entity) {
+  public WorkloadA createA(@RequestBody CompleteWorkloadA entity) {
     DatabaseOption dbOption = new DatabaseOption(entity.getDatabase());
     dbOption = dbOptionService.saveEntity(dbOption);
 
@@ -70,6 +68,39 @@ public class WorkloadAController {
 
     WorkloadA workloadA = entity.getWorkloadA(testConfig);
     return workloadAService.saveEntity(workloadA);
+  }
+
+  @PostMapping("/retrieveA")
+  public WorkloadA retrieveA(@RequestBody RequestWorkloadA entity) {
+    // database
+    DatabaseOption dbOption = dbOptionService.findFirstByDatabase(entity.getDatabase());
+    // dbConfig
+    List<DBConfig> dbConfigLists = dbConfigService.findAllByDatabaseOption(dbOption);
+    DBConfig foundDbConfig = null;
+    for (DBConfig curr : dbConfigLists) {
+      if (curr.isTransactional() == entity.isTransactional()
+          && Objects.equals(curr.getPlatform(), entity.getPlatform())
+          && curr.getNumOfNodes() == entity.getNumOfNodes()
+          && curr.isMultiRegion() == entity.isMultiRegion()
+          && curr.getNumOfRegions() == entity.getNumOfRegions()
+          && Objects.equals(curr.getDescription(), entity.getDescription())) {
+        foundDbConfig = curr;
+        break;
+      }
+    }
+    // testConfig
+    TestConfig foundTestConfig = null;
+    List<TestConfig> testConfigs = testConfigService.findAllByDbConfig(foundDbConfig);
+    for (TestConfig curr : testConfigs) {
+      if (curr.getConcurrencyLevel() == entity.getConcurrencyLevel()
+      && curr.getRecordCounts() == entity.getRecordCounts()
+      && curr.getCommandLine().equals(entity.getCommandLine())) {
+        foundTestConfig = curr;
+        break;
+      }
+    }
+    // workload
+    return workloadAService.findFirstByTestConfigA(foundTestConfig);
   }
 
   @PutMapping

@@ -19,6 +19,10 @@ public class TestConfigServiceImpl implements TestConfigService {
   public List<TestConfig> findAllEntity() {
     return testConfigRepository.findAll();
   }
+
+  public List<TestConfig> findAllByDbConfig(DBConfig dbConfig) {
+    return testConfigRepository.findAllByDbConfig(dbConfig);
+  }
   @Override
   public Optional<TestConfig> findById(Long id) {
     return testConfigRepository.findById(id);

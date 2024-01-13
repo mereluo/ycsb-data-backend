@@ -26,14 +26,9 @@ public class WorkloadAServiceImpl implements WorkloadAService {
     return workloadARepository.findById(id);
   }
 
-  @Override
-  public WorkloadA findFirstByOrderByIdDesc() {
-    return workloadARepository.findFirstByOrderByIdDesc();
-  }
   public WorkloadA findFirstByTestConfigA(TestConfig testConfig) {
     return workloadARepository.findFirstByTestConfigA(testConfig);
   }
-
   @Override
   public WorkloadA saveEntity(WorkloadA workloadA) {
     WorkloadA entity = findFirstByTestConfigA(workloadA.getTestConfigA());

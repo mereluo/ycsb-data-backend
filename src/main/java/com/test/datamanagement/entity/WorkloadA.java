@@ -33,6 +33,10 @@ public class WorkloadA {
   private double updateMaxLatency;
   private double updateP95;
   private double updateP99;
+//  private double rmwMeanLatency;
+//  private double rmwMaxLatency;
+//  private double rmwP95;
+//  private double rmwP99;
 
   // A column that uses Json or other dt to store Time series
   @Convert(converter = JsonConverter.class)
