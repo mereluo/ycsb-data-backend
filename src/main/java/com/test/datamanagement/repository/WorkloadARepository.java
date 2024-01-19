@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WorkloadARepository extends JpaRepository<WorkloadA, Long> {
-  WorkloadA findFirstByTestConfigA(TestConfig testConfig);
+  WorkloadA findFirstByTestConfig(TestConfig testConfig);
 }

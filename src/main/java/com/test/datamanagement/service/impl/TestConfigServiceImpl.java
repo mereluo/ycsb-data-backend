@@ -34,7 +34,7 @@ public class TestConfigServiceImpl implements TestConfigService {
   @Override
   public TestConfig saveEntity(TestConfig testConfig) {
     TestConfig entity = findByCommandLine(testConfig.getCommandLine());
-    if (entity != null) {
+    if (entity != null && entity.equals(testConfig)) {
       return entity;
     }
     return testConfigRepository.save(testConfig);

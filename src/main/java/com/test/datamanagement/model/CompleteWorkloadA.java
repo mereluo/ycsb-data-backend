@@ -12,6 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class CompleteWorkloadA {
+  // workload A fields
   private double opsPerSec;
   private double readMeanLatency;
   private double readMaxLatency;
@@ -23,10 +24,12 @@ public class CompleteWorkloadA {
   private double updateP99;
   private TimeSeries timeSeries;
 
+  // testConfig fields
   private int concurrencyLevel; // 64, 128, 256 maybe an enum?
   private int recordCounts;
   private String commandLine;
 
+  // dbConfig fields
   private boolean isTransactional; // ycsb or ycsb-t
   private String platform;
   private int numOfNodes;
@@ -34,6 +37,7 @@ public class CompleteWorkloadA {
   private int numOfRegions;
   private String description;
 
+  // databaseOption fields
   private String database;
 
   public DBConfig getDBConfig(DatabaseOption dbOption) {

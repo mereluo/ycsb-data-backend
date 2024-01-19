@@ -16,12 +16,12 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-@DiscriminatorValue("F")
 @Table(name="workload_F")
 public class WorkloadF{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  private String workloadType = "F";
   private double opsPerSec;
   private double readMeanLatency;
   private double readMaxLatency;
@@ -37,5 +37,21 @@ public class WorkloadF{
 
   @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "test_config_id")
-  private TestConfig testConfigF;
+  private TestConfig testConfig;
+
+  public WorkloadF(double opsPerSec, double readMeanLatency, double readMaxLatency, double readP95,
+      double readP99, double rmwMeanLatency, double rmwMaxLatency, double rmwP95, double rmwP99,
+      String timeSeries, TestConfig testConfig) {
+    this.opsPerSec = opsPerSec;
+    this.readMeanLatency = readMeanLatency;
+    this.readMaxLatency = readMaxLatency;
+    this.readP95 = readP95;
+    this.readP99 = readP99;
+    this.rmwMeanLatency = rmwMeanLatency;
+    this.rmwMaxLatency = rmwMaxLatency;
+    this.rmwP95 = rmwP95;
+    this.rmwP99 = rmwP99;
+    this.timeSeries = timeSeries;
+    this.testConfig = testConfig;
+  }
 }

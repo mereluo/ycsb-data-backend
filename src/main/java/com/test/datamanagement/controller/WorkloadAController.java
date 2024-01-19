@@ -45,18 +45,8 @@ public class WorkloadAController {
     return workloadAService.findAllEntity();
   }
 
-  @GetMapping("/{id}")
-  public Optional<WorkloadA> findEntityById(@PathVariable("id") Long id) {
-    return workloadAService.findById(id);
-  }
-
-  @PostMapping
-  public WorkloadA saveEntity(@RequestBody WorkloadA workloadA) {
-    return workloadAService.saveEntity(workloadA);
-  }
-
-  @PostMapping("/createA")
-  public WorkloadA createA(@RequestBody CompleteWorkloadA entity) {
+  @PostMapping("/save")
+  public WorkloadA create(@RequestBody CompleteWorkloadA entity) {
     DatabaseOption dbOption = new DatabaseOption(entity.getDatabase());
     dbOption = dbOptionService.saveEntity(dbOption);
 
@@ -70,45 +60,31 @@ public class WorkloadAController {
     return workloadAService.saveEntity(workloadA);
   }
 
-  @PostMapping("/retrieveA")
-  public WorkloadA retrieveA(@RequestBody RequestWorkloadA entity) {
+  @PostMapping("/retrieve")
+  public WorkloadA retrieve(@RequestBody RequestWorkloadA entity) {
     // database
     DatabaseOption dbOption = dbOptionService.findFirstByDatabase(entity.getDatabase());
     // dbConfig
-    List<DBConfig> dbConfigLists = dbConfigService.findAllByDatabaseOption(dbOption);
     DBConfig foundDbConfig = null;
+    DBConfig targetDbConfig = entity.getDBConfig(dbOption);
+    List<DBConfig> dbConfigLists = dbConfigService.findAllByDatabaseOption(dbOption);
     for (DBConfig curr : dbConfigLists) {
-      if (curr.isTransactional() == entity.isTransactional()
-          && Objects.equals(curr.getPlatform(), entity.getPlatform())
-          && curr.getNumOfNodes() == entity.getNumOfNodes()
-          && curr.isMultiRegion() == entity.isMultiRegion()
-          && curr.getNumOfRegions() == entity.getNumOfRegions()
-          && Objects.equals(curr.getDescription(), entity.getDescription())) {
+      if (curr.equals(targetDbConfig)) {
         foundDbConfig = curr;
         break;
       }
     }
     // testConfig
     TestConfig foundTestConfig = null;
+    TestConfig targetTestConfig = entity.getTestConfig(foundDbConfig);
     List<TestConfig> testConfigs = testConfigService.findAllByDbConfig(foundDbConfig);
     for (TestConfig curr : testConfigs) {
-      if (curr.getConcurrencyLevel() == entity.getConcurrencyLevel()
-      && curr.getRecordCounts() == entity.getRecordCounts()
-      && curr.getCommandLine().equals(entity.getCommandLine())) {
+      if (curr.equals(targetTestConfig)) {
         foundTestConfig = curr;
         break;
       }
     }
     // workload
     return workloadAService.findFirstByTestConfigA(foundTestConfig);
-  }
-
-  @PutMapping
-  public WorkloadA updateEntity(@RequestBody WorkloadA workloadA) {
-    return workloadAService.updateEntity(workloadA);
-  }
-  @DeleteMapping("/{id}")
-  public void deleteEntity(@PathVariable("id") Long id) {
-    workloadAService.deleteEntity(id);
   }
 }

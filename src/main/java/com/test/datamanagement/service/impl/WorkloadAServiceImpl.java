@@ -5,8 +5,6 @@ import com.test.datamanagement.repository.WorkloadARepository;
 import com.test.datamanagement.service.WorkloadAService;
 import java.util.List;
 import java.util.Optional;
-import org.aspectj.weaver.ast.Test;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,12 +25,12 @@ public class WorkloadAServiceImpl implements WorkloadAService {
   }
 
   public WorkloadA findFirstByTestConfigA(TestConfig testConfig) {
-    return workloadARepository.findFirstByTestConfigA(testConfig);
+    return workloadARepository.findFirstByTestConfig(testConfig);
   }
   @Override
   public WorkloadA saveEntity(WorkloadA workloadA) {
-    WorkloadA entity = findFirstByTestConfigA(workloadA.getTestConfigA());
-    if (entity != null) {
+    WorkloadA entity = findFirstByTestConfigA(workloadA.getTestConfig());
+    if (entity != null && entity.equals(workloadA)) {
       return entity;
     }
     return workloadARepository.save(workloadA);
