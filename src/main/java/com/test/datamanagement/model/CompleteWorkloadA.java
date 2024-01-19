@@ -41,6 +41,9 @@ public class CompleteWorkloadA {
   private String database;
 
   public DBConfig getDBConfig(DatabaseOption dbOption) {
+    if (!isMultiRegion && numOfRegions > 1) {
+      throw new IllegalArgumentException("Error: inconsistent isMultiRegion and numOfRegions");
+    }
     return new DBConfig(isTransactional, platform, numOfNodes, isMultiRegion,
     numOfRegions, description, dbOption);
   }

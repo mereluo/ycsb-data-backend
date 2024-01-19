@@ -24,12 +24,12 @@ public class WorkloadAServiceImpl implements WorkloadAService {
     return workloadARepository.findById(id);
   }
 
-  public WorkloadA findFirstByTestConfigA(TestConfig testConfig) {
+  public WorkloadA findFirstByTestConfig(TestConfig testConfig) {
     return workloadARepository.findFirstByTestConfig(testConfig);
   }
   @Override
   public WorkloadA saveEntity(WorkloadA workloadA) {
-    WorkloadA entity = findFirstByTestConfigA(workloadA.getTestConfig());
+    WorkloadA entity = findFirstByTestConfig(workloadA.getTestConfig());
     if (entity != null && entity.equals(workloadA)) {
       return entity;
     }
