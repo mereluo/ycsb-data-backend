@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 public class WorkloadAServiceImpl implements WorkloadAService {
 
   private final WorkloadARepository workloadARepository;
-
   public WorkloadAServiceImpl(WorkloadARepository workloadARepository) {
     this.workloadARepository = workloadARepository;
   }

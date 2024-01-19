@@ -1,6 +1,9 @@
 package com.test.datamanagement.entity;
 
+import com.test.datamanagement.model.JsonConverter;
+import com.test.datamanagement.model.TimeSeries;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.util.Objects;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,8 +36,9 @@ public class WorkloadF{
   private double rmwP95;
   private double rmwP99;
   // A column that uses Json or other dt to store Time series
+  @Convert(converter = JsonConverter.class)
   @Column(columnDefinition = "jsonb")
-  private String timeSeries;
+  private TimeSeries timeSeries;
 
   @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "test_config_id")
@@ -41,7 +46,7 @@ public class WorkloadF{
 
   public WorkloadF(double opsPerSec, double readMeanLatency, double readMaxLatency, double readP95,
       double readP99, double rmwMeanLatency, double rmwMaxLatency, double rmwP95, double rmwP99,
-      String timeSeries, TestConfig testConfig) {
+      TimeSeries timeSeries, TestConfig testConfig) {
     this.opsPerSec = opsPerSec;
     this.readMeanLatency = readMeanLatency;
     this.readMaxLatency = readMaxLatency;
@@ -53,5 +58,37 @@ public class WorkloadF{
     this.rmwP99 = rmwP99;
     this.timeSeries = timeSeries;
     this.testConfig = testConfig;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    WorkloadF workloadF = (WorkloadF) o;
+    return Double.compare(getOpsPerSec(), workloadF.getOpsPerSec()) == 0
+        && Double.compare(getReadMeanLatency(), workloadF.getReadMeanLatency()) == 0
+        && Double.compare(getReadMaxLatency(), workloadF.getReadMaxLatency()) == 0
+        && Double.compare(getReadP95(), workloadF.getReadP95()) == 0
+        && Double.compare(getReadP99(), workloadF.getReadP99()) == 0
+        && Double.compare(getRmwMeanLatency(), workloadF.getRmwMeanLatency()) == 0
+        && Double.compare(getRmwMaxLatency(), workloadF.getRmwMaxLatency()) == 0
+        && Double.compare(getRmwP95(), workloadF.getRmwP95()) == 0
+        && Double.compare(getRmwP99(), workloadF.getRmwP99()) == 0
+        && Objects.equals(getWorkloadType(), workloadF.getWorkloadType())
+        && Objects.equals(getTimeSeries(), workloadF.getTimeSeries())
+        && Objects.equals(getTestConfig(), workloadF.getTestConfig());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getWorkloadType(), getOpsPerSec(), getReadMeanLatency(),
+        getReadMaxLatency(),
+        getReadP95(), getReadP99(), getRmwMeanLatency(), getRmwMaxLatency(), getRmwP95(),
+        getRmwP99(),
+        getTimeSeries(), getTestConfig());
   }
 }

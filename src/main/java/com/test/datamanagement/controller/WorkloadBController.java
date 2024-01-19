@@ -3,13 +3,13 @@ package com.test.datamanagement.controller;
 import com.test.datamanagement.entity.DBConfig;
 import com.test.datamanagement.entity.DatabaseOption;
 import com.test.datamanagement.entity.TestConfig;
-import com.test.datamanagement.entity.WorkloadA;
+import com.test.datamanagement.entity.WorkloadB;
 import com.test.datamanagement.model.CompleteWorkload;
 import com.test.datamanagement.model.RequestWorkload;
 import com.test.datamanagement.service.DBConfigService;
 import com.test.datamanagement.service.DBOptionService;
 import com.test.datamanagement.service.TestConfigService;
-import com.test.datamanagement.service.WorkloadAService;
+import com.test.datamanagement.service.WorkloadBService;
 import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,28 +20,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/workloadA")
-public class WorkloadAController {
+@RequestMapping("/api/workloadB")
+public class WorkloadBController {
 
   private final DBOptionService dbOptionService;
   private final DBConfigService dbConfigService;
   private final TestConfigService testConfigService;
-  private final WorkloadAService workloadAService;
+  private final WorkloadBService workloadBService;
 
-  public WorkloadAController(WorkloadAService workloadAService, DBOptionService dbOptionService,
+  public WorkloadBController(WorkloadBService workloadBService, DBOptionService dbOptionService,
       DBConfigService dbConfigService, TestConfigService testConfigService) {
-    this.workloadAService = workloadAService;
+    this.workloadBService = workloadBService;
     this.dbOptionService = dbOptionService;
     this.dbConfigService = dbConfigService;
     this.testConfigService = testConfigService;
   }
   @GetMapping("")
-  public List<WorkloadA> findAllEntity() {
-    return workloadAService.findAllEntity();
+  public List<WorkloadB> findAllEntity() {
+    return workloadBService.findAllEntity();
   }
 
   @PostMapping("/save")
-  public WorkloadA create(@RequestBody CompleteWorkload entity) {
+  public WorkloadB create(@RequestBody CompleteWorkload entity) {
     DatabaseOption dbOption = new DatabaseOption(entity.getDatabase());
     dbOption = dbOptionService.saveEntity(dbOption);
 
@@ -51,12 +51,12 @@ public class WorkloadAController {
     TestConfig testConfig = entity.getTestConfig(dbConfig);
     testConfig = testConfigService.saveEntity(testConfig);
 
-    WorkloadA workloadA = entity.getWorkloadA(testConfig);
-    return workloadAService.saveEntity(workloadA);
+    WorkloadB workloadB = entity.getWorkloadB(testConfig);
+    return workloadBService.saveEntity(workloadB);
   }
 
   @PostMapping("/retrieve")
-  public WorkloadA retrieve(@RequestBody RequestWorkload entity) {
+  public WorkloadB retrieve(@RequestBody RequestWorkload entity) {
     // database
     DatabaseOption dbOption = dbOptionService.findFirstByDatabase(entity.getDatabase());
     // dbConfig
@@ -80,6 +80,6 @@ public class WorkloadAController {
       }
     }
     // workload
-    return workloadAService.findFirstByTestConfig(foundTestConfig);
+    return workloadBService.findFirstByTestConfig(foundTestConfig);
   }
 }

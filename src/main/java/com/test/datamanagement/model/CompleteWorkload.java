@@ -4,6 +4,8 @@ import com.test.datamanagement.entity.DBConfig;
 import com.test.datamanagement.entity.DatabaseOption;
 import com.test.datamanagement.entity.TestConfig;
 import com.test.datamanagement.entity.WorkloadA;
+import com.test.datamanagement.entity.WorkloadB;
+import com.test.datamanagement.entity.WorkloadF;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +13,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CompleteWorkloadA {
+public class CompleteWorkload {
+  private String workloadType;
   // workload A fields
   private double opsPerSec;
   private double readMeanLatency;
@@ -22,6 +25,12 @@ public class CompleteWorkloadA {
   private double updateMaxLatency;
   private double updateP95;
   private double updateP99;
+
+  private double rmwMeanLatency;
+  private double rmwMaxLatency;
+  private double rmwP95;
+  private double rmwP99;
+
   private TimeSeries timeSeries;
 
   // testConfig fields
@@ -57,4 +66,17 @@ public class CompleteWorkloadA {
     readP99, updateMeanLatency, updateMaxLatency, updateP95,
     updateP99, timeSeries, testConfig);
   }
+
+  public WorkloadB getWorkloadB(TestConfig testConfig) {
+    return new WorkloadB(opsPerSec, readMeanLatency, readMaxLatency, readP95,
+    readP99, updateMeanLatency, updateMaxLatency, updateP95,
+    updateP99, timeSeries, testConfig);
+  }
+
+  public WorkloadF getWorkloadF(TestConfig testConfig) {
+    return new WorkloadF(opsPerSec, readMeanLatency, readMaxLatency, readP95,
+    readP99, rmwMeanLatency, rmwMaxLatency, rmwP95, rmwP99,
+    timeSeries, testConfig);
+  }
+
 }

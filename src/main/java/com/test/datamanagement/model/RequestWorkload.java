@@ -3,7 +3,6 @@ package com.test.datamanagement.model;
 import com.test.datamanagement.entity.DBConfig;
 import com.test.datamanagement.entity.DatabaseOption;
 import com.test.datamanagement.entity.TestConfig;
-import com.test.datamanagement.entity.WorkloadA;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RequestWorkloadA {
+public class RequestWorkload {
   // testConfig fields
   private int concurrencyLevel; // 64, 128, 256
   private int recordCounts;
