@@ -24,6 +24,7 @@ public class WorkloadA {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  private String workloadType = "A";
   private double opsPerSec;
   private double readMeanLatency;
   private double readMaxLatency;
@@ -33,10 +34,6 @@ public class WorkloadA {
   private double updateMaxLatency;
   private double updateP95;
   private double updateP99;
-//  private double rmwMeanLatency;
-//  private double rmwMaxLatency;
-//  private double rmwP95;
-//  private double rmwP99;
 
   // A column that uses Json or other dt to store Time series
   @Convert(converter = JsonConverter.class)
@@ -45,11 +42,11 @@ public class WorkloadA {
 
   @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "test_config_id")
-  private TestConfig testConfigA;
+  private TestConfig testConfig;
 
   public WorkloadA(double opsPerSec, double readMeanLatency, double readMaxLatency, double readP95,
       double readP99, double updateMeanLatency, double updateMaxLatency, double updateP95,
-      double updateP99, TimeSeries timeSeries, TestConfig testConfigA) {
+      double updateP99, TimeSeries timeSeries, TestConfig testConfig) {
     this.opsPerSec = opsPerSec;
     this.readMeanLatency = readMeanLatency;
     this.readMaxLatency = readMaxLatency;
@@ -60,7 +57,7 @@ public class WorkloadA {
     this.updateP95 = updateP95;
     this.updateP99 = updateP99;
     this.timeSeries = timeSeries;
-    this.testConfigA = testConfigA;
+    this.testConfig = testConfig;
   }
 
   @Override
@@ -82,13 +79,13 @@ public class WorkloadA {
         && Double.compare(getUpdateP95(), workloadA.getUpdateP95()) == 0
         && Double.compare(getUpdateP99(), workloadA.getUpdateP99()) == 0
         && Objects.equals(getTimeSeries(), workloadA.getTimeSeries())
-        && Objects.equals(getTestConfigA(), workloadA.getTestConfigA());
+        && Objects.equals(getTestConfig(), workloadA.getTestConfig());
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(getOpsPerSec(), getReadMeanLatency(), getReadMaxLatency(), getReadP95(),
         getReadP99(), getUpdateMeanLatency(), getUpdateMaxLatency(), getUpdateP95(), getUpdateP99(),
-        getTimeSeries(), getTestConfigA());
+        getTimeSeries(), getTestConfig());
   }
 }

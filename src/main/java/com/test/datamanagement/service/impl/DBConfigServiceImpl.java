@@ -34,7 +34,7 @@ public class DBConfigServiceImpl implements DBConfigService {
   @Override
   public DBConfig saveEntity(DBConfig dbConfig) {
     DBConfig entity = findByDescription(dbConfig.getDescription());
-    if (entity != null) {
+    if (entity != null && entity.equals(dbConfig)) {
       return entity;
     }
     return dbConfigRepository.save(dbConfig);
