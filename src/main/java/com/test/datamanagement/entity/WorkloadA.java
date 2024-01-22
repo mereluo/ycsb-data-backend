@@ -16,6 +16,8 @@ import java.util.Objects;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
@@ -36,8 +38,7 @@ public class WorkloadA {
   private double updateP99;
 
   // A column that uses Json or other dt to store Time series
-  @Convert(converter = JsonConverter.class)
-  @Column(columnDefinition = "jsonb")
+  @JdbcTypeCode(SqlTypes.JSON)
   private TimeSeries timeSeries;
 
   @OneToOne(fetch = FetchType.EAGER)

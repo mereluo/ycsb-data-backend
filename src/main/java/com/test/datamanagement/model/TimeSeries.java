@@ -1,14 +1,16 @@
 package com.test.datamanagement.model;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor @Getter @Setter
-public class TimeSeries {
-//  private String category;
-//  private long performance;
-//  private double value;
-  private String value;
-  private String key;
+@Getter @Setter
+public class TimeSeries implements Serializable {
+  Map<String, TimeSeriesData> data;
+
+  public TimeSeries() {
+    this.data = new HashMap<>();
+  }
 }
