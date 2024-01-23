@@ -57,10 +57,10 @@ public class DBConfig {
     return isTransactional() == dbConfig.isTransactional()
         && getNumOfNodes() == dbConfig.getNumOfNodes()
         && isMultiRegion() == dbConfig.isMultiRegion()
-        && getNumOfRegions() == dbConfig.getNumOfRegions() && Objects.equals(getPlatform(),
-        dbConfig.getPlatform()) && Objects.equals(getDescription(),
-        dbConfig.getDescription()) && Objects.equals(getDatabaseOption(),
-        dbConfig.getDatabaseOption());
+        && getNumOfRegions() == dbConfig.getNumOfRegions()
+        && Objects.equals(getPlatform(), dbConfig.getPlatform())
+        && Objects.equals(getDescription(), dbConfig.getDescription())
+        && Objects.equals(getDatabaseOption(), dbConfig.getDatabaseOption());
   }
 
   @Override

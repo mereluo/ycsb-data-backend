@@ -45,6 +45,9 @@ Content-Type: application/json
 ### Get workloadA
 GET http://localhost:8080/api/workloadA
 
+### Get workloadB
+GET http://localhost:8080/api/workloadB
+
 ### Create a new workloadA
 POST http://localhost:8080/api/workloadA
 Content-Type: application/json
@@ -62,4 +65,46 @@ Content-Type: application/json
   "timeSeries": {"key": "timestamp",
                 "value": "meanLatency"},
   "testConfigA": {"id" :  1}
+}
+
+### Create a new workloadA using all fields
+POST http://localhost:8080/api/workloadA/save
+Content-Type: application/json
+
+{
+  "workloadType": "A",
+  "opsPerSec": 100.0,
+  "readMeanLatency": 10.5,
+  "readMaxLatency": 20.5,
+  "readP95": 15.5,
+  "readP99": 25.5,
+  "updateMeanLatency": 8.5,
+  "updateMaxLatency": 18.5,
+  "updateP95": 13.5,
+  "updateP99": 23.5,
+  "timeSeries": {
+    "data": {
+      "entry1": {
+        "time": [1, 2, 3],
+        "latency": [10.5, 15.2, 20.0]
+      },
+      "entry2": {
+        "time": [4, 5, 6],
+        "latency": [18.3, 22.1, 25.8]
+      }
+    }
+  },
+
+  "concurrencyLevel": 64,
+  "recordCounts": 3,
+  "commandLine": "sample commandLine",
+
+  "description": "Sample DBConfig",
+  "transactional": true,
+  "platform": "Sample Platform",
+  "numOfNodes": 3,
+  "numOfRegions": 2,
+  "multiRegion": true,
+
+  "database": "MongoDB"
 }
